@@ -24,9 +24,13 @@
 #ifdef WIN32
     #include <SDL.h>
     #include <SDL_ttf.h>
+
+    std::string OS_SEPARATOR="\\";
 #else
     #include <SDL2/SDL.h>
     #include <SDL2/SDL_ttf.h>
+
+    std::string OS_SEPARATOR="/";
 #endif
 
 namespace Stk

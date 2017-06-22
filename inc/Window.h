@@ -27,6 +27,7 @@ private:
     int height;
     std::string title;
     bool exit=false;
+    int screen=0;
 
     EventLoop loop;
 
@@ -48,6 +49,8 @@ public:
 
         window=SDL_CreateWindow(title.c_str(),x,y,width,height,SDL_WINDOW_SHOWN);
         render=SDL_CreateRenderer(window,-1,0);
+
+        Style::init();
     }
     ~Window()
     {
@@ -70,11 +73,28 @@ public:
             {
                 exit=true;
             }
-
+            
+            SDL_SetRenderDrawColor(render,Style::background_color.r,Style::background_color.g,Style::background_color.b,Style::background_color.a);
             SDL_RenderClear(render);
             action();
+
+            for(Widget* t: screens.at(screen)->get())
+            {
+                t->draw();
+            }
+
             SDL_RenderPresent(render);
         }
+    }
+
+    void addScreen(Screen* s)
+    {
+        screens.push_back(s);
+    }
+
+    Screen* getScreen(int index)
+    {
+        return screens.at(index);
     }
 
     int getX() {return x;}

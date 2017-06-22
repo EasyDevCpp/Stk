@@ -38,7 +38,18 @@ namespace Style
     /* init */
     void init()
     {
-        
+        big_size=35;
+        medium_size=20;
+        small_size=14;
+        font_big=TTF_OpenFont(("inc"+OS_SEPARATOR+"Roboto-Regular.ttf").c_str(),big_size);
+        font_medium=TTF_OpenFont(("inc"+OS_SEPARATOR+"Roboto-Light.ttf").c_str(),medium_size);
+        font_small=TTF_OpenFont(("inc"+OS_SEPARATOR+"Roboto-Light.ttf").c_str(),small_size);
+
+        text_color={225,225,225};
+        normal_color={45,45,45,255};
+        hover_color={0,185,255,255};
+        active_color={255,0,185,255};
+        background_color={30,30,30,255};
     }
 
     /* quit */

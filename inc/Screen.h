@@ -46,9 +46,9 @@ public:
         }
         widgets=to_remove;
     }
-    Widget* get(int index)
+    std::vector<Widget*> get()
     {
-        return widgets.at(index);
+        return widgets;
     }
 };
 

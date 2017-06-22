@@ -9,6 +9,9 @@ public:
     {
         init("Example",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,500,500);
 
+        addScreen(new Stk::Screen());
+        //getScreen(0)->add(new Stk::Button());
+
         joinLoop();
     }
 
