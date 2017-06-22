@@ -44,6 +44,16 @@ namespace Stk
     int mouse_y;
     Uint32 mouse_timer;
 
+    /* Constants */
+    const int CENTERED=SDL_WINDOWPOS_CENTERED;
+    const int EVENT_HOVER=1;
+    const int EVENT_LEFT=2;
+    const int EVENT_MIDDLE=3;
+    const int EVENT_RIGHT=4;
+    const int FONT_BIG=0;
+    const int FONT_MEDIUM=1;
+    const int FONT_SMALL=2;
+
     /* Includes */
     #include "Basics.h"
     #include "Style.h"
