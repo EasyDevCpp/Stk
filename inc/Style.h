@@ -1,6 +1,6 @@
 /*
     Stk - SDL-based GUI Toolkit
-    Copyright (C) 2017  EasyDevCpp
+    Copyright (C) 2017  Robin Krause
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,9 +21,7 @@
 namespace Style
 {
     /* Font styles */
-    TTF_Font* font_big;
-    TTF_Font* font_medium;
-    TTF_Font* font_small;
+    std::array<TTF_Font*,3> font;
     int big_size;
     int medium_size;
     int small_size;
@@ -41,11 +39,11 @@ namespace Style
         big_size=35;
         medium_size=20;
         small_size=14;
-        font_big=TTF_OpenFont(("inc"+OS_SEPARATOR+"Roboto-Regular.ttf").c_str(),big_size);
-        font_medium=TTF_OpenFont(("inc"+OS_SEPARATOR+"Roboto-Light.ttf").c_str(),medium_size);
-        font_small=TTF_OpenFont(("inc"+OS_SEPARATOR+"Roboto-Light.ttf").c_str(),small_size);
+        font[0]=TTF_OpenFont(("inc"+OS_SEPARATOR+"fonts"+OS_SEPARATOR+"Roboto-Regular.ttf").c_str(),big_size);
+        font[1]=TTF_OpenFont(("inc"+OS_SEPARATOR+"fonts"+OS_SEPARATOR+"Roboto-Light.ttf").c_str(),medium_size);
+        font[2]=TTF_OpenFont(("inc"+OS_SEPARATOR+"fonts"+OS_SEPARATOR+"Roboto-Light.ttf").c_str(),small_size);
 
-        text_color={225,225,225};
+        text_color={15,15,15};
         normal_color={45,45,45,255};
         hover_color={0,185,255,255};
         active_color={255,0,185,255};
@@ -55,9 +53,9 @@ namespace Style
     /* quit */
     void quit()
     {
-        TTF_CloseFont(font_big);
-        TTF_CloseFont(font_medium);
-        TTF_CloseFont(font_small);
+        TTF_CloseFont(font[0]);
+        TTF_CloseFont(font[1]);
+        TTF_CloseFont(font[2]);
     }
 }
 

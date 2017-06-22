@@ -1,6 +1,6 @@
 /*
     Stk - SDL-based GUI Toolkit
-    Copyright (C) 2017  EasyDevCpp
+    Copyright (C) 2017  Robin Krause
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -46,9 +46,13 @@ public:
         }
         widgets=to_remove;
     }
-    std::vector<Widget*> get()
+    std::vector<Widget*> getAll()
     {
         return widgets;
+    }
+    Widget* get(int index)
+    {
+        return widgets.at(index);
     }
 };
 

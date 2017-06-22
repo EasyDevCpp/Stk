@@ -15,43 +15,9 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef _Stk
-#define _Stk
+#ifndef _StkWidgets
+#define _StkWidgets
 
-#include <string>
-#include <vector>
-#include <array>
-
-#ifdef WIN32
-    #include <SDL.h>
-    #include <SDL_ttf.h>
-
-    std::string OS_SEPARATOR="\\";
-#else
-    #include <SDL2/SDL.h>
-    #include <SDL2/SDL_ttf.h>
-
-    std::string OS_SEPARATOR="/";
-#endif
-
-namespace Stk
-{
-    /* Global section */
-    SDL_Window* window;
-    SDL_Renderer* render;
-    SDL_Event event;
-    int mouse_x;
-    int mouse_y;
-    Uint32 mouse_timer;
-
-    /* Includes */
-    #include "Basics.h"
-    #include "Style.h"
-    #include "Widget.h"
-    #include "Widgets.h"
-    #include "Screen.h"
-    #include "EventLoop.h"
-    #include "Window.h"
-}
+#include "Widgets/Buttons/Button.h"
 
 #endif

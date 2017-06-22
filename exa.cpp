@@ -1,5 +1,7 @@
 #include "inc/Stk.h"
 
+#include <iostream>
+
 class App: public Stk::Window
 {
 private:
@@ -10,7 +12,7 @@ public:
         init("Example",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,500,500);
 
         addScreen(new Stk::Screen());
-        //getScreen(0)->add(new Stk::Button());
+        getScreen(0)->add(new Stk::Button("Test",40,40,240,40,1));
 
         joinLoop();
     }
@@ -22,7 +24,11 @@ public:
 
     bool end()
     {
-        
+        if(getScreen(0)->get(0)->getEvent()==2)
+        {
+            return true;
+        }
+        return false;
     }
 };
 

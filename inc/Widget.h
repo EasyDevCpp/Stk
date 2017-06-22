@@ -1,6 +1,6 @@
 /*
     Stk - SDL-based GUI Toolkit
-    Copyright (C) 2017  EasyDevCpp
+    Copyright (C) 2017  Robin Krause
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ public:
 
     virtual void draw()=0;
 
-    void getEvent()
+    int getEvent()
     {
         if(mouse_x>=x&&mouse_x<=x+w&&mouse_y>=y&&mouse_y<=y+h&&
             SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT&&
@@ -63,7 +63,13 @@ public:
         {
             event=0;
         }
+        return event;
     }
+
+    int getX(){return x;}
+    int getY(){return y;}
+    int getWidth(){return w;}
+    int getHeight(){return h;}
 };
 
 #endif
