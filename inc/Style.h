@@ -15,29 +15,39 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef _StkEventLoop
-#define _StkEventLoop
+#ifndef _StkStyle
+#define _StkStyle
 
-class EventLoop
+namespace Style
 {
-private:
+    /* Font styles */
+    TTF_Font* font_big;
+    TTF_Font* font_medium;
+    TTF_Font* font_small;
+    int big_size;
+    int medium_size;
+    int small_size;
 
-public:
-    EventLoop(){}
+    /* Colors */
+    SDL_Color text_color;
+    SDL_Color normal_color;
+    SDL_Color hover_color;
+    SDL_Color active_color;
+    SDL_Color background_color;
 
-    bool loop()
+    /* init */
+    void init()
     {
-        while(SDL_PollEvent(&event))
-        {
-            switch(event.type)    
-            {
-                case SDL_QUIT:
-                    return true;
-                    break;
-            }
-        }
-        return false;
+        
     }
-};
+
+    /* quit */
+    void quit()
+    {
+        TTF_CloseFont(font_big);
+        TTF_CloseFont(font_medium);
+        TTF_CloseFont(font_small);
+    }
+}
 
 #endif

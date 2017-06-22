@@ -15,28 +15,40 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef _StkEventLoop
-#define _StkEventLoop
+#ifndef _StkScreen
+#define _StkScreen
 
-class EventLoop
+class Screen
 {
 private:
+    std::vector<Widget*> widgets;
 
 public:
-    EventLoop(){}
-
-    bool loop()
+    Screen(){}
+    ~Screen()
     {
-        while(SDL_PollEvent(&event))
+        widgets.clear();
+    }
+    void add(Widget* w)
+    {
+        widgets.push_back(w);
+    }
+    void remove(int index)
+    {
+        std::vector<Widget*> to_remove;
+
+        for(int i=0;i<widgets.size();i++)
         {
-            switch(event.type)    
+            if(i!=index)
             {
-                case SDL_QUIT:
-                    return true;
-                    break;
+                to_remove.push_back(widgets.at(i));
             }
         }
-        return false;
+        widgets=to_remove;
+    }
+    Widget* get(int index)
+    {
+        return widgets.at(index);
     }
 };
 
