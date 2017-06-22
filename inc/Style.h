@@ -31,6 +31,7 @@ namespace Style
     SDL_Color normal_color;
     SDL_Color hover_color;
     SDL_Color active_color;
+    SDL_Color border_color;
     SDL_Color background_color;
 
     /* init */
@@ -47,6 +48,7 @@ namespace Style
         normal_color={45,45,45,255};
         hover_color={0,185,255,255};
         active_color={255,0,185,255};
+        border_color={15,15,15,255};
         background_color={30,30,30,255};
     }
 

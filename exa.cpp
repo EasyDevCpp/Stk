@@ -24,11 +24,7 @@ public:
 
     bool end()
     {
-        if(getScreen(0)->get(0)->getEvent()==2)
-        {
-            return true;
-        }
-        return false;
+        return getScreen(0)->get(0)->getEvent()==2;
     }
 };
 

@@ -97,6 +97,8 @@ public:
         return screens.at(index);
     }
 
+    int getScreenID() {return screen;}
+    void setScreenID(int id) {screen=id;}
     int getX() {return x;}
     int getY() {return y;}
     int getWidth() {return width;}
