@@ -13,13 +13,14 @@ public:
 
         addScreen(new Stk::Screen());
         getScreen(0)->add(new Stk::Button("Test",40,40,240,40,Stk::FONT_MEDIUM));
+        getScreen(0)->add(new Stk::CheckButton("Test2",40,100,240,40,Stk::FONT_MEDIUM));
 
         joinLoop();
     }
 
     void action()
     {
-
+        
     }
 
     bool end()

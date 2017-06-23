@@ -48,18 +48,47 @@ public:
 
     int getEvent()
     {
-        if(mouse_x>=x&&mouse_x<=x+w&&mouse_y>=y&&mouse_y<=y+h&&
-            SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT&&
-            SDL_GetTicks()-mouse_timer>=180)
+        if(state)
         {
-            event=2;
-            mouse_timer=SDL_GetTicks();
-        }
-        else if(mouse_x>=x&&mouse_x<=x+w&&mouse_y>=y&&mouse_y<=y+h)
-        {
-            event=1;
-        }
-        else
+            if(!active)
+            {
+                if(mouse_x>=x&&mouse_x<=x+w&&mouse_y>=y&&mouse_y<=y+h&&
+                    SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT&&
+                    SDL_GetTicks()-mouse_timer>=180)
+                {
+                    if(check)
+                    {
+                        active=true;
+                    }
+                    event=2;
+                    mouse_timer=SDL_GetTicks();
+                }
+                else if(mouse_x>=x&&mouse_x<=x+w&&mouse_y>=y&&mouse_y<=y+h)
+                {
+                    event=1;
+                }
+                else
+                {
+                    event=0;
+                }
+            }
+            else
+            {
+                if(mouse_x>=x&&mouse_x<=x+w&&mouse_y>=y&&mouse_y<=y+h&&
+                    SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT&&
+                    SDL_GetTicks()-mouse_timer>=180)
+                {
+                    active=false;
+                    event=2;
+                    mouse_timer=SDL_GetTicks();
+                }
+                else
+                {
+                    event=0;
+                }
+            }
+        } 
+        else 
         {
             event=0;
         }
@@ -70,6 +99,14 @@ public:
     int getY(){return y;}
     int getWidth(){return w;}
     int getHeight(){return h;}
+    bool getState(){return state;}
+    bool getActive(){return active;}
+    void setX(int xp){x=xp;}
+    void setY(int yp){y=yp;}
+    void setWidth(int width){w=width;}
+    void setHeight(int height){h=height;}
+    void setState(bool s){state=s;}
+    void setActive(bool a){active=a;}
 };
 
 #endif

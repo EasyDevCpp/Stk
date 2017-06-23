@@ -15,25 +15,27 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef _StkButton
-#define _StkButton
+#ifndef _StkButton3D
+#define _StkButton3D
 
-class Button: public Widget
+class Button3D: public Widget
 {
 private:
     SDL_Texture* text;
     int text_w;
     int text_h;
+    Uint32 ani_timer;
+    int ani_pos;
 
 public:
-    Button(){}
-    Button(std::string widgetText,int x,int y,int width,int height,int font_mode)
+    Button3D(){}
+    Button3D(std::string widgetText,int x,int y,int width,int height,int font_mode)
     {
         init(x,y,width,height,false,true);
         text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[font_mode],widgetText.c_str(),Style::text_color));
         TTF_SizeText(Style::font[font_mode],widgetText.c_str(),&text_w,&text_h);
     }
-    ~Button()
+    ~Button3D()
     {
         SDL_DestroyTexture(text);
     }

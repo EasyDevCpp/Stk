@@ -32,7 +32,17 @@ namespace Style
     SDL_Color hover_color;
     SDL_Color active_color;
     SDL_Color border_color;
+    SDL_Color disabled_color;
     SDL_Color background_color;
+
+    SDL_Color normal3d_color1;
+    SDL_Color normal3d_color2;
+    SDL_Color hover3d_color1;
+    SDL_Color hover3d_color2;
+    SDL_Color active3d_color1;
+    SDL_Color active3d_color2;
+    SDL_Color disabled3d_color;
+    SDL_Color disabled3d_color;
 
     /* init */
     void init()
@@ -49,7 +59,17 @@ namespace Style
         hover_color={0,185,255,255};
         active_color={255,0,185,255};
         border_color={15,15,15,255};
+        disabled_color={5,5,5,255};
         background_color={30,30,30,255};
+
+        normal3d_color1={30,30,30,255};
+        normal3d_color2={30,30,30,255};
+        hover3d_color1={30,30,30,255};
+        hover3d_color2={30,30,30,255};
+        active3d_color1={30,30,30,255};
+        active3d_color2={30,30,30,255};
+        disabled3d_color={30,30,30,255};
+        disabled3d_color={30,30,30,255};        
     }
 
     /* quit */

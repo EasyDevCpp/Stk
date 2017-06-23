@@ -19,5 +19,8 @@
 #define _StkWidgets
 
 #include "Widgets/Buttons/Button.h"
+#include "Widgets/Buttons/CheckButton.h"
+#include "Widgets/Buttons/Button3D.h"
+#include "Widgets/Buttons/CheckButton3D.h"
 
 #endif
