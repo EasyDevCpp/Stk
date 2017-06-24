@@ -435,43 +435,43 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><a href="doc.html#_1_examples">1. Examples</a></p>
+<p><a href="index.html#_1_examples">1. Examples</a></p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="doc.html#_1_1_example_1">1.1 Example 1</a></p>
+<p><a href="index.html#_1_1_example_1">1.1 Example 1</a></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><a href="doc.html#_2_api">2. API</a></p>
+<p><a href="index.html#_2_api">2. API</a></p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="doc.html#_2_1_stk">2.1 Stk</a></p>
+<p><a href="index.html#_2_1_stk">2.1 Stk</a></p>
 </li>
 <li>
-<p><a href="doc.html#_2_2_window">2.2 Window</a></p>
+<p><a href="index.html#_2_2_window">2.2 Window</a></p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="doc.html#_2_2_1_screen">2.2.1 Screen</a></p>
+<p><a href="index.html#_2_2_1_screen">2.2.1 Screen</a></p>
 </li>
 <li>
-<p><a href="doc.html#_2_2_2_eventloop">2.2.2 EventLoop</a></p>
+<p><a href="index.html#_2_2_2_eventloop">2.2.2 EventLoop</a></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><a href="doc.html#_2_3_style">2.3 Style</a></p>
+<p><a href="index.html#_2_3_style">2.3 Style</a></p>
 </li>
 <li>
-<p><a href="doc.html#_2_4_widgets">2.4 Widgets</a></p>
+<p><a href="index.html#_2_4_widgets">2.4 Widgets</a></p>
 </li>
 <li>
-<p><a href="doc.html#_2_5_base">2.5 Base</a></p>
+<p><a href="index.html#_2_5_base">2.5 Base</a></p>
 </li>
 </ul>
 </div>
@@ -649,10 +649,10 @@ public:
 <p>void joinLoop(): joins main loop</p>
 </li>
 <li>
-<p>void addScreen(<a href="doc.html#_2_2_1_screen">Screen</a>* s): See <a href="doc.html#_2_2_1_screen">Screen</a></p>
+<p>void addScreen(<a href="index.html#_2_2_1_screen">Screen</a>* s): See <a href="index.html#_2_2_1_screen">Screen</a></p>
 </li>
 <li>
-<p><a href="doc.html#_2_2_1_screen">Screen</a>* getScreen(int index): See <a href="doc.html#_2_2_1_screen">Screen</a></p>
+<p><a href="index.html#_2_2_1_screen">Screen</a>* getScreen(int index): See <a href="index.html#_2_2_1_screen">Screen</a></p>
 </li>
 <li>
 <p>int getScreenID(): Active screenID</p>
@@ -696,8 +696,8 @@ public:
 <div class="sect3">
 <h4 id="_what_is_the_screen_class">What is the Screen-class?</h4>
 <div class="paragraph">
-<p>Basically the Screen-class contains a container of unlimited <a href="doc.html#_2_4_widgets">Widget</a>* objects and is a member
-of the <a href="doc.html#_2_2_window">Stk::Window</a>-class.</p>
+<p>Basically the Screen-class contains a container of unlimited <a href="index.html#_2_4_widgets">Widget</a>* objects and is a member
+of the <a href="index.html#_2_2_window">Stk::Window</a>-class.</p>
 </div>
 </div>
 <div class="sect3">
@@ -711,16 +711,16 @@ of the <a href="doc.html#_2_2_window">Stk::Window</a>-class.</p>
 <p>~Screen(): deconstructor</p>
 </li>
 <li>
-<p>void add(<a href="doc.html#_2_4_widgets">Widget</a>* w): add a <a href="doc.html#_2_4_widgets">Widget</a>* to the vector</p>
+<p>void add(<a href="index.html#_2_4_widgets">Widget</a>* w): add a <a href="index.html#_2_4_widgets">Widget</a>* to the vector</p>
 </li>
 <li>
-<p>void remove(int index): remove a <a href="doc.html#_2_4_widgets">Widget</a>* at the index of the vector</p>
+<p>void remove(int index): remove a <a href="index.html#_2_4_widgets">Widget</a>* at the index of the vector</p>
 </li>
 <li>
-<p>std::vector&lt;<a href="doc.html#_2_4_widgets">Widget*</a>&gt; getAll(): get the complete <a href="doc.html#_2_4_widgets">Widget</a>* vector</p>
+<p>std::vector&lt;<a href="index.html#_2_4_widgets">Widget*</a>&gt; getAll(): get the complete <a href="index.html#_2_4_widgets">Widget</a>* vector</p>
 </li>
 <li>
-<p><a href="doc.html#_2_4_widgets">Widget</a>* get(int index): get the <a href="doc.html#_2_4_widgets">Widget</a>* element at index from the vector</p>
+<p><a href="index.html#_2_4_widgets">Widget</a>* get(int index): get the <a href="index.html#_2_4_widgets">Widget</a>* element at index from the vector</p>
 </li>
 </ul>
 </div>
@@ -732,7 +732,7 @@ of the <a href="doc.html#_2_2_window">Stk::Window</a>-class.</p>
 <h4 id="_what_does_it">What does it?</h4>
 <div class="paragraph">
 <p>The EventLoop-class handles SDLEvents and is a member
-of the <a href="doc.html#_2_2_window">Stk::Window</a>-class.</p>
+of the <a href="index.html#_2_2_window">Stk::Window</a>-class.</p>
 </div>
 </div>
 <div class="sect3">
@@ -826,7 +826,7 @@ of the <a href="doc.html#_2_2_window">Stk::Window</a>-class.</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2017-06-24 14:37:42 CEST
+Last updated 2017-06-24 15:03:00 CEST
 </div>
 </div>
 </body>
