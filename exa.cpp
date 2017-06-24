@@ -14,6 +14,8 @@ public:
         addScreen(new Stk::Screen());
         getScreen(0)->add(new Stk::Button("Test",40,40,240,40,Stk::FONT_MEDIUM));
         getScreen(0)->add(new Stk::CheckButton("Test2",40,100,240,40,Stk::FONT_MEDIUM));
+        getScreen(0)->add(new Stk::Button3D("Test3",40,160,240,40,Stk::FONT_MEDIUM));
+        getScreen(0)->add(new Stk::CheckButton3D("Test4",40,220,240,40,Stk::FONT_MEDIUM));
 
         joinLoop();
     }

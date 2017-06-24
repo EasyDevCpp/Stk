@@ -34,6 +34,7 @@ public:
         init(x,y,width,height,false,true);
         text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[font_mode],widgetText.c_str(),Style::text_color));
         TTF_SizeText(Style::font[font_mode],widgetText.c_str(),&text_w,&text_h);
+        ani_pos=0;
     }
     ~Button3D()
     {
@@ -46,20 +47,50 @@ public:
         {
             if(getEvent()==0)
             {
-                Base::renderFillRect(Style::normal_color,getX(),getY(),getWidth(),getHeight());
+                Base::renderFillRect(Style::normal3d_color2,getX(),getY()+10,getWidth(),getHeight());
+                Base::renderFillRect(Style::normal3d_color1,getX(),getY()+ani_pos,getWidth(),getHeight());
+                if(SDL_GetTicks()-ani_timer>=25)
+                {
+                    if(ani_pos>0)
+                    {
+                        ani_pos--;
+                        ani_timer=SDL_GetTicks();
+                    }
+                }
             }
-            else
+            else if(getEvent()==1)
             {
-                Base::renderFillRect(Style::hover_color,getX(),getY(),getWidth(),getHeight());
+                Base::renderFillRect(Style::hover3d_color2,getX(),getY()+10,getWidth(),getHeight());
+                Base::renderFillRect(Style::hover3d_color1,getX(),getY()+ani_pos,getWidth(),getHeight());
+                if(SDL_GetTicks()-ani_timer>=25)
+                {
+                    if(ani_pos<8)
+                    {
+                        ani_pos++;
+                        ani_timer=SDL_GetTicks();
+                    }
+                }
             }
-            Base::renderDrawRect(Style::border_color,getX(),getY(),getWidth(),getHeight());
-            Base::renderCopyEx(text,getX()+getWidth()/2-text_w/2,getY()+getHeight()/2-text_h/2,text_w,text_h);
+            else if(getEvent()==2)
+            {
+                Base::renderFillRect(Style::hover3d_color2,getX(),getY()+10,getWidth(),getHeight());
+                Base::renderFillRect(Style::hover3d_color1,getX(),getY()+7,getWidth(),getHeight());
+            }
+            Base::renderCopyEx(text,getX()+getWidth()/2-text_w/2,getY()+ani_pos+getHeight()/2-text_h/2,text_w,text_h);
         }
         else
         {
-            Base::renderFillRect(Style::disabled_color,getX(),getY(),getWidth(),getHeight());
-            Base::renderDrawRect(Style::border_color,getX(),getY(),getWidth(),getHeight());
-            Base::renderCopyEx(text,getX()+getWidth()/2-text_w/2,getY()+getHeight()/2-text_h/2,text_w,text_h);
+            Base::renderFillRect(Style::disabled3d_color2,getX(),getY()+10,getWidth(),getHeight());
+            Base::renderFillRect(Style::disabled3d_color1,getX(),getY()+ani_pos,getWidth(),getHeight());
+            Base::renderCopyEx(text,getX()+getWidth()/2-text_w/2,getY()+ani_pos+getHeight()/2-text_h/2,text_w,text_h);
+            if(SDL_GetTicks()-ani_timer>=25)
+            {
+                if(ani_pos>0)
+                {
+                    ani_pos--;
+                    ani_timer=SDL_GetTicks();
+                }
+            }
         }
     }
 };

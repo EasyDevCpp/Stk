@@ -41,8 +41,8 @@ namespace Style
     SDL_Color hover3d_color2;
     SDL_Color active3d_color1;
     SDL_Color active3d_color2;
-    SDL_Color disabled3d_color;
-    SDL_Color disabled3d_color;
+    SDL_Color disabled3d_color1;
+    SDL_Color disabled3d_color2;
 
     /* init */
     void init()
@@ -51,8 +51,8 @@ namespace Style
         medium_size=20;
         small_size=14;
         font[0]=TTF_OpenFont(("inc"+OS_SEPARATOR+"fonts"+OS_SEPARATOR+"Roboto-Regular.ttf").c_str(),big_size);
-        font[1]=TTF_OpenFont(("inc"+OS_SEPARATOR+"fonts"+OS_SEPARATOR+"Roboto-Light.ttf").c_str(),medium_size);
-        font[2]=TTF_OpenFont(("inc"+OS_SEPARATOR+"fonts"+OS_SEPARATOR+"Roboto-Light.ttf").c_str(),small_size);
+        font[1]=TTF_OpenFont(("inc"+OS_SEPARATOR+"fonts"+OS_SEPARATOR+"Roboto-Regular.ttf").c_str(),medium_size);
+        font[2]=TTF_OpenFont(("inc"+OS_SEPARATOR+"fonts"+OS_SEPARATOR+"Roboto-Regular.ttf").c_str(),small_size);
 
         text_color={15,15,15};
         normal_color={45,45,45,255};
@@ -62,14 +62,14 @@ namespace Style
         disabled_color={5,5,5,255};
         background_color={30,30,30,255};
 
-        normal3d_color1={30,30,30,255};
-        normal3d_color2={30,30,30,255};
-        hover3d_color1={30,30,30,255};
-        hover3d_color2={30,30,30,255};
-        active3d_color1={30,30,30,255};
-        active3d_color2={30,30,30,255};
-        disabled3d_color={30,30,30,255};
-        disabled3d_color={30,30,30,255};        
+        normal3d_color1={45,45,45,255};
+        normal3d_color2={35,35,35,255};
+        hover3d_color1={50,50,50,255};
+        hover3d_color2={40,40,40,255};
+        active3d_color1={219,87,5,255};
+        active3d_color2={219,31,5,255};
+        disabled3d_color1={20,20,20,255};
+        disabled3d_color2={10,10,10,255};        
     }
 
     /* quit */
