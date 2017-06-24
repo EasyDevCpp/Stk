@@ -459,7 +459,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="doc.html#_2_2_1_screen">2.2.1 Screen</a></p>
 </li>
 <li>
-<p><a href="doc.html#_2_2_2_loop">2.2.2 EventLoop</a></p>
+<p><a href="doc.html#_2_2_2_eventloop">2.2.2 EventLoop</a></p>
 </li>
 </ul>
 </div>
@@ -599,12 +599,16 @@ int main(int argc,char* argv[])
 <div class="content">
 <pre class="highlight"><code class="language-c++" data-lang="c++">#include "inc/Stk.h"
 
+/*
+    This is the basic structure of each Stk-based App!
+*/
+
 class App: public Stk::Window
 {
 public:
     App()
     {
-        init("Example1",Stk::CENTERED,Stk::CENTERED,500,500);
+        init("Example",Stk::CENTERED,Stk::CENTERED,500,500);
         addScreen(new Stk::Screen());
         joinLoop();
     }
@@ -623,7 +627,7 @@ public:
 </div>
 </div>
 <div class="sect3">
-<h4 id="_functions">Functions:</h4>
+<h4 id="_constructors_and_methods">Constructors and Methods:</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -674,6 +678,147 @@ public:
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_important">Important:</h4>
+<div class="paragraph">
+<p>The void action() and the bool end() methode a pure virtual so <strong>YOU HAVE TO ADD THEM IN YOUR CLASS!</strong></p>
+</div>
+<div class="paragraph">
+<p>Even you have only one Screen, you have to ADD one with the addScreen(*)-Methode from above!</p>
+</div>
+<div class="paragraph">
+<p>Stk allows only <strong>ONE</strong> window per <strong>APP</strong>!</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_2_1_screen">2.2.1 Screen</h3>
+<div class="sect3">
+<h4 id="_what_is_the_screen_class">What is the Screen-class?</h4>
+<div class="paragraph">
+<p>Basically the Screen-class contains a container of unlimited <a href="doc.html#_2_4_widgets">Widget</a>* objects and is a member
+of the <a href="doc.html#_2_2_window">Stk::Window</a>-class.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_constructors_and_methods_2">Constructors and Methods:</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Screen(): constructor</p>
+</li>
+<li>
+<p>~Screen(): deconstructor</p>
+</li>
+<li>
+<p>void add(<a href="doc.html#_2_4_widgets">Widget</a>* w): add a <a href="doc.html#_2_4_widgets">Widget</a>* to the vector</p>
+</li>
+<li>
+<p>void remove(int index): remove a <a href="doc.html#_2_4_widgets">Widget</a>* at the index of the vector</p>
+</li>
+<li>
+<p>std::vector&lt;<a href="doc.html#_2_4_widgets">Widget*</a>&gt; getAll(): get the complete <a href="doc.html#_2_4_widgets">Widget</a>* vector</p>
+</li>
+<li>
+<p><a href="doc.html#_2_4_widgets">Widget</a>* get(int index): get the <a href="doc.html#_2_4_widgets">Widget</a>* element at index from the vector</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_2_2_eventloop">2.2.2 EventLoop</h3>
+<div class="sect3">
+<h4 id="_what_does_it">What does it?</h4>
+<div class="paragraph">
+<p>The EventLoop-class handles SDLEvents and is a member
+of the <a href="doc.html#_2_2_window">Stk::Window</a>-class.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_constructors_and_methods_3">Constructors and Methods:</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>EventLoop(): constructor(empty)</p>
+</li>
+<li>
+<p>bool loop(): handles the events</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_important_2">Important:</h4>
+<div class="paragraph">
+<p><strong>Please avoid using any method of this class! For internal use only!</strong></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_3_style">2.3 Style</h3>
+<div class="sect3">
+<h4 id="_styles">Styles:</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-c++" data-lang="c++">namespace Style
+{
+    /* Font styles */
+    std::array&lt;TTF_Font*,3&gt; font;
+    int big_size;
+    int medium_size;
+    int small_size;
+
+    /* Colors */
+    SDL_Color text_color;
+    SDL_Color normal_color;
+    SDL_Color hover_color;
+    SDL_Color active_color;
+    SDL_Color border_color;
+    SDL_Color disabled_color;
+    SDL_Color background_color;
+
+    SDL_Color normal3d_color1;
+    SDL_Color normal3d_color2;
+    SDL_Color hover3d_color1;
+    SDL_Color hover3d_color2;
+    SDL_Color active3d_color1;
+    SDL_Color active3d_color2;
+    SDL_Color disabled3d_color1;
+    SDL_Color disabled3d_color2;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_notice">Notice:</h4>
+<div class="paragraph">
+<p>All of these styles can be manipulated after the call of the Stk::Window::init(*) method!</p>
+</div>
+<div class="paragraph">
+<p>To manipulate SDL_Colors just use {r,g,b,a} as the syntax, e.g:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-c++" data-lang="c++">Stk::Style::text_color={34,34,34,255};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To manipulate the fonts use this syntax, e.g:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-c++" data-lang="c++">Stk::Style::font[Stk::FONT_SMALL]=TTF_OpenFont("file",small_size);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_4_widgets">2.4 Widgets</h3>
+<div class="sect3">
+<h4 id="_constructors_and_methods_4">Constructors and Methods:</h4>
+
+</div>
 </div>
 </div>
 </div>
@@ -681,7 +826,7 @@ public:
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2017-06-24 10:47:51 CEST
+Last updated 2017-06-24 14:37:42 CEST
 </div>
 </div>
 </body>
