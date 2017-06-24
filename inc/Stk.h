@@ -47,7 +47,7 @@ namespace Stk
     /* Constants */
     const int CENTERED=SDL_WINDOWPOS_CENTERED;
     const int EVENT_HOVER=1;
-    const int EVENT_LEFT=2;
+    const int EVENT_CLICK=2;
     const int FONT_BIG=0;
     const int FONT_MEDIUM=1;
     const int FONT_SMALL=2;

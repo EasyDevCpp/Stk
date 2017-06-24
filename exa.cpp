@@ -27,7 +27,7 @@ public:
 
     bool end()
     {
-        return getScreen(0)->get(0)->getEvent()==Stk::EVENT_LEFT;
+        return getScreen(0)->get(0)->getEvent()==Stk::EVENT_CLICK;
     }
 };
 

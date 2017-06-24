@@ -67,6 +67,12 @@ public:
             Base::renderCopyEx(text,getX()+getWidth()/2-text_w/2,getY()+getHeight()/2-text_h/2,text_w,text_h);
         }
     }
+
+    void setText(std::string widgetText,int font_mode)
+    {
+        text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[font_mode],widgetText.c_str(),Style::text_color));
+        TTF_SizeText(Style::font[font_mode],widgetText.c_str(),&text_w,&text_h);
+    }
 };
 
 #endif
