@@ -12,17 +12,21 @@ public:
         init("Example",Stk::CENTERED,Stk::CENTERED,500,500);
 
         addScreen(new Stk::Screen());
-        getScreen(0)->add(new Stk::Button("Test",40,40,240,40,Stk::FONT_MEDIUM));
-        getScreen(0)->add(new Stk::CheckButton("Test2",40,100,240,40,Stk::FONT_MEDIUM));
-        getScreen(0)->add(new Stk::Button3D("Test3",40,160,240,40,Stk::FONT_MEDIUM));
-        getScreen(0)->add(new Stk::CheckButton3D("Test4",40,220,240,40,Stk::FONT_MEDIUM));
+        getScreen(0)->add(new Stk::Button("Quit",40,40,240,40,Stk::FONT_MEDIUM));
+        getScreen(0)->add(new Stk::CheckButton("Try Me!",40,100,240,40,Stk::FONT_MEDIUM));
+        getScreen(0)->add(new Stk::Button3D("Try Me!",40,160,240,40,Stk::FONT_MEDIUM));
+        getScreen(0)->add(new Stk::CheckButton3D("Try Me!",40,220,240,40,Stk::FONT_MEDIUM));
+        getScreen(0)->add(new Stk::Label("Label1",40,280,Stk::FONT_BIG));
 
         joinLoop();
     }
 
     void action()
     {
-        
+        if(getScreen(0)->get(2)->getEvent()==Stk::EVENT_CLICK)
+        {
+            ((Stk::Button3D*)getScreen(0)->get(2))->setText("Hello World!",Stk::FONT_MEDIUM);
+        }
     }
 
     bool end()

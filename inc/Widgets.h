@@ -23,4 +23,6 @@
 #include "Widgets/Buttons/Button3D.h"
 #include "Widgets/Buttons/CheckButton3D.h"
 
+#include "Widgets/Labels/Label.h"
+
 #endif
