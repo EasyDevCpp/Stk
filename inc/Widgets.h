@@ -24,5 +24,16 @@
 #include "Widgets/Buttons/CheckButton3D.h"
 
 #include "Widgets/Labels/Label.h"
+#include "Widgets/Labels/ClickLabel.h"
+#include "Widgets/Labels/CheckLabel.h"
+
+#include "Widgets/Checkboxes/Checkbox.h"
+
+#include "Widgets/Slider/Slider.h"
+
+#include "Widgets/Scrollbar/Scrollbar.h"
+
+#include "Widgets/Inputs/Input.h"
+#include "Widgets/Inputs/Edit.h"
 
 #endif
