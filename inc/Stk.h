@@ -44,6 +44,13 @@ namespace Stk
     int mouse_y;
     Uint32 mouse_timer;
 
+    /* Internal section */
+    namespace Internal {
+        std::vector<std::string> text_input;
+        std::vector<bool> text_active;
+        std::vector<bool> text_update;
+    }
+
     /* Constants */
     const int CENTERED=SDL_WINDOWPOS_CENTERED;
     const int EVENT_HOVER=1;

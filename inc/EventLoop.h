@@ -20,11 +20,9 @@
 
 class EventLoop
 {
-private:
-
 public:
-    EventLoop(){}
-
+    EventLoop(){SDL_StartTextInput();}
+    ~EventLoop(){SDL_StopTextInput();}
     bool loop()
     {
         while(SDL_PollEvent(&event))
@@ -33,6 +31,15 @@ public:
             {
                 case SDL_QUIT:
                     return true;
+                    break;
+                case SDL_TEXTINPUT:
+                    for(int i=0;i<text_active.size();i++)
+                    {
+                        if(text_active.at(i))
+                        {
+                            text_input.at(i)=event.text.text;
+                        }
+                    }
                     break;
             }
         }
