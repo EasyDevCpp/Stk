@@ -20,6 +20,7 @@ public:
         getScreen(1)->add(new Stk::Checkbox("Box1",40,40,Stk::FONT_MEDIUM));
         getScreen(1)->add(new Stk::CheckLabel("Label1",40,100,Stk::FONT_MEDIUM));
         getScreen(1)->add(new Stk::Slider(40,160,420,35));
+        getScreen(1)->add(new Stk::Input("Username",40,220,360,40,Stk::FONT_MEDIUM));
 
         joinLoop();
     }

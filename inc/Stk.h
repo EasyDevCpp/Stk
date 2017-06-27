@@ -49,6 +49,7 @@ namespace Stk
         std::vector<std::string> text_input;
         std::vector<bool> text_active;
         std::vector<bool> text_update;
+        std::vector<int> text_cursor;
     }
 
     /* Constants */

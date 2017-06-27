@@ -33,11 +33,13 @@ public:
                     return true;
                     break;
                 case SDL_TEXTINPUT:
-                    for(int i=0;i<text_active.size();i++)
+                    for(int i=0;i<Internal::text_active.size();i++)
                     {
-                        if(text_active.at(i))
+                        if(Internal::text_active.at(i))
                         {
-                            text_input.at(i)=event.text.text;
+                            Internal::text_input.at(i)+=event.text.text;
+                            Internal::text_update.at(i)=true;
+                            break;
                         }
                     }
                     break;
