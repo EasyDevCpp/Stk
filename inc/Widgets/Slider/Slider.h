@@ -21,13 +21,15 @@
 class Slider: public Widget
 {
 private:
-    
+    int value;
+    Uint32 timer;
 
 public:
     Slider(){}
     Slider(int x,int y,int width,int value=0)
     {
-        
+        init(x,y,width,6,false,true);
+        this->value=value;
     }
     ~Slider(){}
 
@@ -35,11 +37,33 @@ public:
     {
         if(getState())
         {
-            
+            Base::renderFillRect(Style::border_color,getX(),getY(),getWidth(),getHeight());
+            Base::renderFillRect(Style::hover_color,getX()+2,getY()+2,((double)(getWidth()-4)*value/100),2);
+            Base::renderFillRect(Style::normal_color,getX()-4+((double)getWidth()*value/100),getY()-7,8,20);
+
+            if(mouse_x>=getX()&&mouse_x<=getX()+getWidth()&&mouse_y>=getY()-7&&mouse_y<=getY()+getHeight()+7
+                &&SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT)
+            {
+                if(SDL_GetTicks()-timer>=15)
+                {
+                    if(mouse_x>=getX()-4+((double)getWidth()*value/100))
+                    {
+                        value++;
+                        timer=SDL_GetTicks();
+                    }
+                    else if(mouse_x<=getX()-4+((double)getWidth()*value/100))
+                    {
+                        value--;
+                        timer=SDL_GetTicks();
+                    }
+                }
+            }
         }
         else
         {
-            
+            Base::renderFillRect(Style::border_color,getX(),getY(),getWidth(),getHeight());
+            Base::renderFillRect(Style::disabled_color,getX()+2,getY()+2,getWidth()-4,2);
+            Base::renderFillRect(Style::disabled_color,getX()-4+((double)getWidth()*value/100),getY()-7,8,20);
         }
     }
 
