@@ -51,6 +51,7 @@ namespace Stk
         std::vector<bool> text_update;
         std::vector<int> text_cursor;
         std::vector<int> text_marklen;
+        std::vector<int> text_markpos;
     }
 
     /* Constants */

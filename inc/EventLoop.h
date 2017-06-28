@@ -53,8 +53,28 @@ public:
                             {
                                 if(Internal::text_cursor.at(i)>0)
                                 {
-                                    Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i)-1,1);
+                                    Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i)-1,Internal::text_marklen.at(i));
                                     Internal::text_update.at(i)=true;
+                                    Internal::text_cursor.at(i)--;
+                                    Internal::text_marklen.at(i)=1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else if(event.key.keysym.sym==SDLK_LEFT)
+                    {
+                        for(int i=0;i<Internal::text_active.size();i++)
+                        {
+                            if(Internal::text_active.at(i))
+                            {
+                                const Uint8* keys=SDL_GetKeyboardState(NULL);
+                                if(keys[SDL_SCANCODE_LSHIFT]||keys[SDL_SCANCODE_RSHIFT])
+                                {
+                                    
+                                }
+                                if(Internal::text_cursor.at(i)>0)
+                                {
                                     Internal::text_cursor.at(i)--;
                                     break;
                                 }

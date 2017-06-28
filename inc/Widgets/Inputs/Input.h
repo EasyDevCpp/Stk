@@ -42,6 +42,7 @@ public:
         Internal::text_active.push_back(false);
         Internal::text_update.push_back(false);
         Internal::text_cursor.push_back(0);
+        Internal::text_marklen.push_back(1);
         id=Internal::text_input.size()-1;
     }
     ~Input()
