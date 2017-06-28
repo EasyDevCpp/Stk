@@ -39,6 +39,7 @@ public:
                         {
                             Internal::text_input.at(i)+=event.text.text;
                             Internal::text_update.at(i)=true;
+                            Internal::text_cursor.at(i)++;
                             break;
                         }
                     }

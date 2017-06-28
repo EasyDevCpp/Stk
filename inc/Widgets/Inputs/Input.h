@@ -28,6 +28,7 @@ private:
     int id;
     Uint32 blink_timer;
     bool blink=false;
+    int pos;
 
 public:
     Input(){}
@@ -36,7 +37,6 @@ public:
         init(x,y,width,height,true,true);
         text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[font_mode],defaultText.c_str(),Style::border_color));
         TTF_SizeText(Style::font[font_mode],defaultText.c_str(),&text_w,&text_h);
-        cursor=0;
         fmode=font_mode;
         Internal::text_input.push_back("");
         Internal::text_active.push_back(false);
@@ -80,12 +80,29 @@ public:
             {
                 Base::renderFillRect(Style::hover_color,getX(),getY(),getWidth(),getHeight());
                 Base::renderFillRect(Style::normal_color,getX()+1,getY()+1,getWidth()-2,getHeight()-2);
-
                 if(Internal::text_update.at(id))
                 {
                     text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[fmode],Internal::text_input.at(id).c_str(),Style::text_color));
                     TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).c_str(),&text_w,&text_h);
                     Internal::text_update.at(id)=false;
+                }
+                if(blink)
+                {
+                    TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).substr(0,Internal::text_cursor.at(id)).c_str(),&pos,&text_h);
+                    Base::renderFillRect(Style::border_color,getX()+8+pos,getY()+getHeight()/2-text_h/2,1,text_h);
+                    if(SDL_GetTicks()-blink_timer>=320)
+                    {
+                        blink=false;
+                        blink_timer=SDL_GetTicks();
+                    }
+                }
+                else
+                {
+                    if(SDL_GetTicks()-blink_timer>=180)
+                    {
+                        blink=true;
+                        blink_timer=SDL_GetTicks();
+                    }
                 }
             }
             else
@@ -93,7 +110,6 @@ public:
                 Base::renderFillRect(Style::border_color,getX(),getY(),getWidth(),getHeight());
                 Base::renderFillRect(Style::normal_color,getX()+1,getY()+1,getWidth()-2,getHeight()-2);
             }
-
             Base::renderCopyEx(text,getX()+8,getY()+getHeight()/2-text_h/2,text_w,text_h);
         }
         else
