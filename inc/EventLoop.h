@@ -37,7 +37,7 @@ public:
                     {
                         if(Internal::text_active.at(i))
                         {
-                            Internal::text_input.at(i)+=event.text.text;
+                            Internal::text_input.at(i).insert(Internal::text_cursor.at(i),event.text.text);
                             Internal::text_update.at(i)=true;
                             Internal::text_cursor.at(i)++;
                             break;
@@ -76,6 +76,25 @@ public:
                                 if(Internal::text_cursor.at(i)>0)
                                 {
                                     Internal::text_cursor.at(i)--;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else if(event.key.keysym.sym==SDLK_RIGHT)
+                    {
+                        for(int i=0;i<Internal::text_active.size();i++)
+                        {
+                            if(Internal::text_active.at(i))
+                            {
+                                const Uint8* keys=SDL_GetKeyboardState(NULL);
+                                if(keys[SDL_SCANCODE_LSHIFT]||keys[SDL_SCANCODE_RSHIFT])
+                                {
+                                    
+                                }
+                                if(Internal::text_cursor.at(i)<Internal::text_input.at(i).length())
+                                {
+                                    Internal::text_cursor.at(i)++;
                                     break;
                                 }
                             }
