@@ -44,6 +44,24 @@ public:
                         }
                     }
                     break;
+                case SDL_KEYDOWN:
+                    if(event.key.keysym.sym==SDLK_BACKSPACE)
+                    {
+                        for(int i=0;i<Internal::text_active.size();i++)
+                        {
+                            if(Internal::text_active.at(i))
+                            {
+                                if(Internal::text_cursor.at(i)>0)
+                                {
+                                    Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i)-1,1);
+                                    Internal::text_update.at(i)=true;
+                                    Internal::text_cursor.at(i)--;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    break;
             }
         }
         return false;

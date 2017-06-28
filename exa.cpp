@@ -1,3 +1,4 @@
+#include <iostream> //Debugging
 #include "inc/Stk.h"
 
 class App: public Stk::Window
