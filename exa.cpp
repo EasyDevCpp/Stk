@@ -9,6 +9,14 @@ public:
     App()
     {
         init("Example",Stk::CENTERED,Stk::CENTERED,500,500);
+        
+        /* Set Options */
+        /* Uncomment to activate Low-CPU mode */
+        Stk::Options::LOW_CPU_USAGE=true;
+        /* Uncomment to activate Fixed FPS mode */
+        //Stk::Options::FIXED_FPS=true;
+        /* Uncomment to set the Fixed FPS value from 30 to 25 */
+        //Stk::Options::FIXED_FPS_VALUE=25;
 
         addScreen(new Stk::Screen());
         getScreen(0)->add(new Stk::Button("Quit",40,40,240,40,Stk::FONT_MEDIUM));

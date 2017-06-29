@@ -22,7 +22,7 @@
 #include <vector>
 #include <array>
 
-#ifdef WIN32
+#ifdef _WIN32
     #include <SDL.h>
     #include <SDL_ttf.h>
 
@@ -50,8 +50,13 @@ namespace Stk
         std::vector<bool> text_active;
         std::vector<bool> text_update;
         std::vector<int> text_cursor;
-        std::vector<int> text_marklen;
+        std::vector<bool> text_mark;
         std::vector<int> text_markpos;
+        std::vector<int> text_marklen;
+        std::vector<int> text_markdir;
+
+        int fps=0;
+        Uint32 fps_timer;
     }
 
     /* Constants */
@@ -61,6 +66,13 @@ namespace Stk
     const int FONT_BIG=0;
     const int FONT_MEDIUM=1;
     const int FONT_SMALL=2;
+
+    /* Options */
+    namespace Options {
+        bool FIXED_FPS=false;
+        int FIXED_FPS_VALUE=30;
+        bool LOW_CPU_USAGE=false;
+    }
 
     /* Includes */
     #include "Basics.h"

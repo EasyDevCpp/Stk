@@ -34,6 +34,7 @@ namespace Style
     SDL_Color border_color;
     SDL_Color disabled_color;
     SDL_Color background_color;
+    SDL_Color mark_color;
 
     SDL_Color normal3d_color1;
     SDL_Color normal3d_color2;
@@ -61,6 +62,7 @@ namespace Style
         border_color={15,15,15,255};
         disabled_color={5,5,5,255};
         background_color={30,30,30,255};
+        mark_color={0,145,255,255};
 
         normal3d_color1={45,45,45,255};
         normal3d_color2={35,35,35,255};

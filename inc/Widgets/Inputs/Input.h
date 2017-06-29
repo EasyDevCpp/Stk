@@ -29,6 +29,7 @@ private:
     Uint32 blink_timer;
     bool blink=false;
     int pos;
+    int len;
 
 public:
     Input(){}
@@ -42,7 +43,10 @@ public:
         Internal::text_active.push_back(false);
         Internal::text_update.push_back(false);
         Internal::text_cursor.push_back(0);
+        Internal::text_markpos.push_back(0);
+        Internal::text_mark.push_back(false);
         Internal::text_marklen.push_back(1);
+        Internal::text_markdir.push_back(0);
         id=Internal::text_input.size()-1;
     }
     ~Input()
@@ -73,6 +77,8 @@ public:
                     SDL_GetTicks()-mouse_timer>=180)
             {
                 Internal::text_active.at(id)=false;
+                Internal::text_mark.at(id)=false;
+                Internal::text_marklen.at(id)=1;
                 setActive(false);
                 mouse_timer=SDL_GetTicks();
             }
@@ -86,6 +92,33 @@ public:
                     text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[fmode],Internal::text_input.at(id).c_str(),Style::text_color));
                     TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).c_str(),&text_w,&text_h);
                     Internal::text_update.at(id)=false;
+                }
+                if(Internal::text_mark.at(id))
+                {
+                    if(Internal::text_markpos.at(id)>Internal::text_cursor.at(id))
+                    {
+                        TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).substr(0,Internal::text_cursor.at(id)).c_str(),&pos,&text_h);
+                        TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).substr(Internal::text_cursor.at(id),Internal::text_marklen.at(id)).c_str(),&len,&text_h);
+                    }
+                    else if(Internal::text_markpos.at(id)<Internal::text_cursor.at(id))
+                    {
+                        TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).substr(0,Internal::text_markpos.at(id)-1).c_str(),&pos,&text_h);
+                        TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).substr(Internal::text_markpos.at(id)-1,Internal::text_marklen.at(id)).c_str(),&len,&text_h);
+                    }
+                    else
+                    {
+                        if(Internal::text_markdir.at(id)==1)
+                        {
+                            TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).substr(0,Internal::text_cursor.at(id)).c_str(),&pos,&text_h);
+                            TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).substr(Internal::text_cursor.at(id),1).c_str(),&len,&text_h);
+                        }
+                        else
+                        {
+                            TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).substr(0,Internal::text_markpos.at(id)-1).c_str(),&pos,&text_h);
+                            TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).substr(Internal::text_cursor.at(id)-1,1).c_str(),&len,&text_h);
+                        }
+                    }
+                    Base::renderFillRect(Style::mark_color,getX()+8+pos,getY()+getHeight()/2-text_h/2,len,text_h);
                 }
                 if(blink)
                 {
