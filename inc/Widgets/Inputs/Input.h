@@ -30,12 +30,14 @@ private:
     bool blink=false;
     int pos;
     int len;
+    int mode;
+    std::string pw_string;
 
 public:
     Input(){}
-    Input(std::string defaultText,int x,int y,int width,int height,int font_mode)
+    Input(std::string defaultText,int x,int y,int width,int height,int font_mode,int input_mode=0)
     {
-        init(x,y,width,height,true,true);
+        init(x,y,width,height,false,true);
         text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[font_mode],defaultText.c_str(),Style::border_color));
         TTF_SizeText(Style::font[font_mode],defaultText.c_str(),&text_w,&text_h);
         fmode=font_mode;
@@ -49,6 +51,7 @@ public:
         Internal::text_markdir.push_back(0);
         Internal::text_end.push_back(false);
         id=Internal::text_input.size()-1;
+        mode=input_mode;
     }
     ~Input()
     {
@@ -74,23 +77,25 @@ public:
                     Internal::text_active.at(id)=false;
                 }
             }
-            else if(SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT&&
-                    SDL_GetTicks()-mouse_timer>=180)
-            {
-                Internal::text_active.at(id)=false;
-                Internal::text_mark.at(id)=false;
-                Internal::text_marklen.at(id)=1;
-                setActive(false);
-                mouse_timer=SDL_GetTicks();
-            }
-
-            if(getActive())
+            if(Internal::text_active.at(id))
             {
                 Base::renderFillRect(Style::hover_color,getX(),getY(),getWidth(),getHeight());
                 Base::renderFillRect(Style::normal_color,getX()+1,getY()+1,getWidth()-2,getHeight()-2);
                 if(Internal::text_update.at(id))
                 {
-                    text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[fmode],Internal::text_input.at(id).c_str(),Style::text_color));
+                    if(mode==INPUT_TEXT)
+                    {
+                        text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[fmode],Internal::text_input.at(id).c_str(),Style::text_color));
+                    }
+                    else if(mode==INPUT_PW)
+                    {
+                        pw_string="";
+                        for(int i=0;i<Internal::text_input.at(id).length();i++)
+                        {
+                            pw_string+=" ";
+                        }
+                        text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[fmode],pw_string.c_str(),Style::text_color));
+                    }
                     TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).c_str(),&text_w,&text_h);
                     Internal::text_update.at(id)=false;
                 }

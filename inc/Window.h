@@ -82,26 +82,18 @@ public:
             {
                 t->draw();
             }
-
             SDL_RenderPresent(render);
-            if(Options::LOW_CPU_USAGE&&!Options::FIXED_FPS)
+            if(Options::MEDIUM_CPU_USAGE)
+            {
+                SDL_Delay(5);
+            }
+            else if(Options::LOW_CPU_USAGE)
             {
                 SDL_Delay(10);
             }
-            else if(Options::FIXED_FPS)
+            else if(Options::EXTRA_LOW_CPU_USAGE)
             {
-                if(SDL_GetTicks()-Internal::fps_timer<=1000)
-                {
-                    if(Internal::fps<Options::FIXED_FPS_VALUE)
-                    {
-                        Internal::fps++;
-                    }
-                }
-                else
-                {
-                    Internal::fps=0;
-                    Internal::fps_timer=SDL_GetTicks();
-                }
+                SDL_Delay(50);
             }
         }
     }

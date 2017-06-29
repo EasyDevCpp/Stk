@@ -11,12 +11,20 @@ public:
         init("Example",Stk::CENTERED,Stk::CENTERED,500,500);
         
         /* Set Options */
+        /* 
+            Comment all to run the app in Normal Mode 
+            Perhaps that may cause a CPU Usage up to 60%! 
+            I personally prefer MEDIUM_CPU_USAGE or the 
+            LOW_CPU_USAGE Option for normal GUIs... For 
+            Games you may prefer to stay in the Normal 
+            Mode!
+        */
+        /* Uncomment to activate Medium-CPU mode */
+        //Stk::Options::MEDIUM_CPU_USAGE=true;
         /* Uncomment to activate Low-CPU mode */
         Stk::Options::LOW_CPU_USAGE=true;
-        /* Uncomment to activate Fixed FPS mode */
-        //Stk::Options::FIXED_FPS=true;
-        /* Uncomment to set the Fixed FPS value from 30 to 25 */
-        //Stk::Options::FIXED_FPS_VALUE=25;
+        /* Uncomment to activate Extra-Low-CPU mode */
+        //Stk::Options::EXTRA_LOW_CPU_USAGE=true;
 
         addScreen(new Stk::Screen());
         getScreen(0)->add(new Stk::Button("Quit",40,40,240,40,Stk::FONT_MEDIUM));
@@ -30,6 +38,7 @@ public:
         getScreen(1)->add(new Stk::CheckLabel("Label1",40,100,Stk::FONT_MEDIUM));
         getScreen(1)->add(new Stk::Slider(40,160,420,35));
         getScreen(1)->add(new Stk::Input("Username",40,220,360,40,Stk::FONT_MEDIUM));
+        getScreen(1)->add(new Stk::Input("Password",40,280,360,40,Stk::FONT_MEDIUM,Stk::INPUT_PW));
 
         joinLoop();
     }
