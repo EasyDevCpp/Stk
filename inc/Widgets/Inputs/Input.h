@@ -47,6 +47,7 @@ public:
         Internal::text_mark.push_back(false);
         Internal::text_marklen.push_back(1);
         Internal::text_markdir.push_back(0);
+        Internal::text_end.push_back(false);
         id=Internal::text_input.size()-1;
     }
     ~Input()
@@ -137,6 +138,15 @@ public:
                         blink=true;
                         blink_timer=SDL_GetTicks();
                     }
+                }
+                TTF_SizeText(Style::font[fmode],Internal::text_input.at(id).c_str(),&len,&text_h);
+                if(len<getWidth()-40)
+                {
+                    Internal::text_end.at(id)=false;
+                }
+                else
+                {
+                    Internal::text_end.at(id)=true;
                 }
             }
             else

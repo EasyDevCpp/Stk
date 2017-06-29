@@ -54,6 +54,7 @@ namespace Stk
         std::vector<int> text_markpos;
         std::vector<int> text_marklen;
         std::vector<int> text_markdir;
+        std::vector<bool> text_end;
 
         int fps=0;
         Uint32 fps_timer;

@@ -35,7 +35,7 @@ public:
                 case SDL_TEXTINPUT:
                     for(int i=0;i<Internal::text_active.size();i++)
                     {
-                        if(Internal::text_active.at(i))
+                        if(Internal::text_active.at(i)&&!Internal::text_end.at(i))
                         {
                             Internal::text_input.at(i).insert(Internal::text_cursor.at(i),event.text.text);
                             Internal::text_update.at(i)=true;
@@ -51,38 +51,45 @@ public:
                         {
                             if(Internal::text_active.at(i))
                             {
-                                if(!Internal::text_mark.at(i)&&Internal::text_cursor.at(i)>0)
+                                if(Internal::text_cursor.at(i)>=0)
                                 {
-                                    Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i)-1,1);
-                                    Internal::text_cursor.at(i)--;
-                                }
-                                else
-                                {
-                                    if(Internal::text_markpos.at(i)>Internal::text_cursor.at(i))
+                                    if(!Internal::text_mark.at(i))
                                     {
-                                        Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i),Internal::text_marklen.at(i));
-                                    }
-                                    else if(Internal::text_markpos.at(i)<Internal::text_cursor.at(i))
-                                    {
-                                        Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_markpos.at(i)-1,Internal::text_marklen.at(i));
-                                        Internal::text_cursor.at(i)-=Internal::text_marklen.at(i);
-                                    }
-                                    else
-                                    {
-                                        if(Internal::text_markdir.at(i)==1)
-                                        {
-                                            Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i),1);
-                                        }
-                                        else
+                                        if(Internal::text_cursor.at(i)>0)
                                         {
                                             Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i)-1,1);
                                             Internal::text_cursor.at(i)--;
                                         }
                                     }
-                                    Internal::text_marklen.at(i)=1;
-                                    Internal::text_mark.at(i)=false;
+                                    else
+                                    {
+                                        if(Internal::text_markpos.at(i)>Internal::text_cursor.at(i))
+                                        {
+                                            Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i),Internal::text_marklen.at(i));
+                                        }
+                                        else if(Internal::text_markpos.at(i)<Internal::text_cursor.at(i))
+                                        {
+                                            Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_markpos.at(i)-1,Internal::text_marklen.at(i));
+                                            Internal::text_cursor.at(i)-=Internal::text_marklen.at(i);
+                                        }
+                                        else
+                                        {
+                                            if(Internal::text_markdir.at(i)==1)
+                                            {
+                                                Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i),1);
+                                            }
+                                            else
+                                            {
+                                                Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i)-1,1);
+                                                Internal::text_cursor.at(i)--;
+                                            }
+                                        }
+                                        Internal::text_marklen.at(i)=1;
+                                        Internal::text_mark.at(i)=false;
+                                    }
+                                    Internal::text_update.at(i)=true;
+                                    Internal::text_end.at(i)=false;                                    
                                 }
-                                Internal::text_update.at(i)=true;                                    
                                 break;
                             }
                         }
@@ -161,6 +168,36 @@ public:
                             }
                         }
                     }
+                    else if(event.key.keysym.sym==SDLK_END)
+                    {
+                        for(int i=0;i<Internal::text_active.size();i++)
+                        {
+                            Internal::text_cursor.at(i)=Internal::text_input.at(i).length();
+                            const Uint8* keys=SDL_GetKeyboardState(NULL);
+                            if(keys[SDL_SCANCODE_LSHIFT]||keys[SDL_SCANCODE_RSHIFT])
+                            {
+                                Internal::text_markpos.at(i)=1;
+                                Internal::text_marklen.at(i)=Internal::text_input.at(i).length();
+                                Internal::text_mark.at(i)=true;
+                                Internal::text_markdir.at(i)=0;
+                            }
+                        }
+                    }
+                    else if(event.key.keysym.sym==SDLK_HOME)
+                    {
+                        for(int i=0;i<Internal::text_active.size();i++)
+                        {
+                            Internal::text_cursor.at(i)=0;
+                            const Uint8* keys=SDL_GetKeyboardState(NULL);
+                            if(keys[SDL_SCANCODE_LSHIFT]||keys[SDL_SCANCODE_RSHIFT])
+                            {
+                                Internal::text_markpos.at(i)=Internal::text_input.at(i).length()-1;
+                                Internal::text_marklen.at(i)=Internal::text_markpos.at(i)-Internal::text_cursor.at(i)+1;
+                                Internal::text_mark.at(i)=true;
+                                Internal::text_markdir.at(i)=1;
+                            }
+                        }
+                    }
                     else if(SDL_GetModState() & KMOD_CTRL)
                     {
                         for(int i=0;i<Internal::text_active.size();i++)
@@ -187,6 +224,37 @@ public:
                                         SDL_SetClipboardText(Internal::text_input.at(i).substr(Internal::text_cursor.at(i)-1,1).c_str());
                                     }
                                 }
+                            }
+                            else if(keys[SDL_SCANCODE_X])
+                            {
+                                if(Internal::text_markpos.at(i)>Internal::text_cursor.at(i))
+                                {
+                                    SDL_SetClipboardText(Internal::text_input.at(i).substr(Internal::text_cursor.at(i),Internal::text_marklen.at(i)).c_str());
+                                    Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i),Internal::text_marklen.at(i));
+                                }
+                                else if(Internal::text_markpos.at(i)<Internal::text_cursor.at(i))
+                                {
+                                    SDL_SetClipboardText(Internal::text_input.at(i).substr(Internal::text_markpos.at(i)-1,Internal::text_marklen.at(i)).c_str());
+                                    Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_markpos.at(i)-1,Internal::text_marklen.at(i));
+                                    Internal::text_cursor.at(i)-=Internal::text_marklen.at(i);
+                                }
+                                else
+                                {
+                                    if(Internal::text_markdir.at(i)==1)
+                                    {
+                                        SDL_SetClipboardText(Internal::text_input.at(i).substr(Internal::text_cursor.at(i),1).c_str());
+                                        Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i),1);
+                                    }
+                                    else
+                                    {
+                                        SDL_SetClipboardText(Internal::text_input.at(i).substr(Internal::text_cursor.at(i)-1,1).c_str());
+                                        Internal::text_input.at(i)=Internal::text_input.at(i).erase(Internal::text_cursor.at(i)-1,1);
+                                        Internal::text_cursor.at(i)--;
+                                    }
+                                }
+                                Internal::text_update.at(i)=true;
+                                Internal::text_mark.at(i)=false;
+                                Internal::text_marklen.at(i)=1;
                             }
                             else if(keys[SDL_SCANCODE_V])
                             {
