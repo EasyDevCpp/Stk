@@ -71,6 +71,7 @@ public:
                         Internal::text_active.at(i)=false;    
                     }
                     Internal::text_active.at(id)=true;
+                    Internal::text_mark.at(id)=false;
                 }
                 else
                 {
@@ -92,7 +93,7 @@ public:
                         pw_string="";
                         for(int i=0;i<Internal::text_input.at(id).length();i++)
                         {
-                            pw_string+=" ";
+                            pw_string+="_";
                         }
                         text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[fmode],pw_string.c_str(),Style::text_color));
                     }

@@ -27,7 +27,7 @@ private:
 
 public:
     Scrollbar(){}
-    Scrollbar(std::string widgetText,int x,int y,int width,int height,int font_mode)
+    Scrollbar(int x,int y,int width,int height,int font_mode)
     {
         init(x,y,width,height,false,true);
         text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[font_mode],widgetText.c_str(),Style::text_color));

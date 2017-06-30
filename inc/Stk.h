@@ -84,8 +84,8 @@ namespace Stk
     #include "Basics.h"
     #include "Style.h"
     #include "Widget.h"
-    #include "Widgets.h"
     #include "Screen.h"
+    #include "Widgets.h"
     #include "EventLoop.h"
     #include "Window.h"
 }
