@@ -21,50 +21,40 @@
 class Scrollbar: public Widget
 {
 private:
-    SDL_Texture* text;
-    int text_w;
-    int text_h;
+    Screen sc;
+    int md=0;
+    int id;
 
 public:
     Scrollbar(){}
-    Scrollbar(int x,int y,int width,int height,int font_mode)
+    Scrollbar(Screen screen,int mode=0)
     {
+        sc=screen;
+        md=mode;
+        Internal::scrollbar_mwheel.push_back(0);
+
+        id=Internal::scrollbar_mwheel.size();
+
+        int atm_biggest_pos;
+        for(Widget* t: screen.getAll())
+        {
+            
+        }
+
         init(x,y,width,height,false,true);
-        text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[font_mode],widgetText.c_str(),Style::text_color));
-        TTF_SizeText(Style::font[font_mode],widgetText.c_str(),&text_w,&text_h);
     }
-    ~Scrollbar()
-    {
-        SDL_DestroyTexture(text);
-    }
+    ~Scrollbar(){}
 
     void draw()
     {
         if(getState())
         {
-            if(getEvent()==0)
-            {
-                Base::renderFillRect(Style::normal_color,getX(),getY(),getWidth(),getHeight());
-            }
-            else
-            {
-                Base::renderFillRect(Style::hover_color,getX(),getY(),getWidth(),getHeight());
-            }
-            Base::renderDrawRect(Style::border_color,getX(),getY(),getWidth(),getHeight());
-            Base::renderCopyEx(text,getX()+getWidth()/2-text_w/2,getY()+getHeight()/2-text_h/2,text_w,text_h);
+            
         }
         else
         {
-            Base::renderFillRect(Style::disabled_color,getX(),getY(),getWidth(),getHeight());
-            Base::renderDrawRect(Style::border_color,getX(),getY(),getWidth(),getHeight());
-            Base::renderCopyEx(text,getX()+getWidth()/2-text_w/2,getY()+getHeight()/2-text_h/2,text_w,text_h);
+            
         }
-    }
-
-    void setText(std::string widgetText,int font_mode)
-    {
-        text=SDL_CreateTextureFromSurface(render,TTF_RenderText_Blended(Style::font[font_mode],widgetText.c_str(),Style::text_color));
-        TTF_SizeText(Style::font[font_mode],widgetText.c_str(),&text_w,&text_h);
     }
 };
 

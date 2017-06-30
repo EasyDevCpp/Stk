@@ -56,8 +56,10 @@ namespace Stk
         std::vector<int> text_markdir;
         std::vector<bool> text_end;
 
-        int fps=0;
-        Uint32 fps_timer;
+        std::vector<int> scrollbar_mwheel;
+
+        int width;
+        int height;
     }
 
     /* Constants */
@@ -72,6 +74,9 @@ namespace Stk
 
     const int INPUT_TEXT=0;
     const int INPUT_PW=1;
+
+    const int SCROLLBAR_HORIZONTAL=0;
+    const int SCROLLBAR_VERTICAL=0;
 
     /* Options */
     namespace Options {

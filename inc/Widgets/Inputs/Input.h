@@ -169,6 +169,11 @@ public:
             Base::renderCopyEx(text,getX()+8,getY()+getHeight()/2-text_h/2,text_w,text_h);
         }
     }
+
+    std::string getText()
+    {
+        return Internal::text_input.at(id);
+    }
 };
 
 #endif

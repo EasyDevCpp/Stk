@@ -46,6 +46,8 @@ public:
         this->y=y_pos;
         this->width=width;
         this->height=height;
+        Internal::width=width;
+        Internal::height=height;
 
         window=SDL_CreateWindow(title.c_str(),x,y,width,height,SDL_WINDOW_SHOWN);
         render=SDL_CreateRenderer(window,-1,0);
