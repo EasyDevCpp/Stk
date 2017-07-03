@@ -21,27 +21,38 @@
 class Scrollbar: public Widget
 {
 private:
-    Screen sc;
-    int md=0;
+    Screen* sc;
     int id;
+    bool vertical=false;
+    bool horizontal=false;
+    int atm_biggest_x=0;
+    int atm_biggest_y=0;
+    int vertical_v=0;
+    int horizontal_v=0;
 
 public:
     Scrollbar(){}
-    Scrollbar(Screen screen,int mode=0)
+    Scrollbar(Screen* screen)
     {
         sc=screen;
-        md=mode;
         Internal::scrollbar_mwheel.push_back(0);
 
         id=Internal::scrollbar_mwheel.size();
 
-        int atm_biggest_pos;
-        for(Widget* t: screen.getAll())
+        for(Widget* t: screen->getAll())
         {
-            
+            if(t->getY()+t->getHeight()>Internal::height&&t->getY()+t->getHeight()>atm_biggest_y)
+            {
+                atm_biggest_y=t->getY()+t->getHeight();
+                vertical=true;
+            }
+            if(t->getX()+t->getWidth()>Internal::width&&t->getX()+t->getWidth()>atm_biggest_x)
+            {
+                atm_biggest_x=t->getX()+t->getWidth();
+                horizontal=true;
+            }
         }
-
-        init(x,y,width,height,false,true);
+        screen->__setScrollbars(vertical,horizontal);
     }
     ~Scrollbar(){}
 
@@ -49,13 +60,26 @@ public:
     {
         if(getState())
         {
-            
+            if(vertical)
+            {
+                Base::renderFillRect(Style::border_color,Internal::width-15,0,15,Internal::height-15);
+                Base::renderFillRect(Style::normal_color,Internal::width-13,2+vertical_v,11,80);
+            }
+            if(horizontal)
+            {
+                Base::renderFillRect(Style::border_color,0,Internal::height-15,Internal::width-15,15);
+                Base::renderFillRect(Style::normal_color,2+horizontal_v,Internal::height-13,80,11);
+            }
         }
         else
         {
             
         }
     }
+    void setVerticalValue(int v){vertical_v=v;}
+    void setHorizontalValue(int v){horizontal_v=v;}
+    int getVerticalValue(){return vertical_v;}
+    int getHorizontalValue(){return horizontal_v;}
 };
 
 #endif

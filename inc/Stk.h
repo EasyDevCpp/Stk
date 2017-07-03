@@ -75,9 +75,6 @@ namespace Stk
     const int INPUT_TEXT=0;
     const int INPUT_PW=1;
 
-    const int SCROLLBAR_HORIZONTAL=0;
-    const int SCROLLBAR_VERTICAL=0;
-
     /* Options */
     namespace Options {
         bool MEDIUM_CPU_USAGE=false;

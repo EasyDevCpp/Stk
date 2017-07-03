@@ -22,6 +22,8 @@ class Screen
 {
 private:
     std::vector<Widget*> widgets;
+    bool vert_scrollbar=false;
+    bool hori_scrollbar=false;
 
 public:
     Screen(){}
@@ -54,6 +56,7 @@ public:
     {
         return widgets.at(index);
     }
+    void __setScrollbars(bool t,bool h){vert_scrollbar=t;hori_scrollbar=h;}
 };
 
 #endif

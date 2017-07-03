@@ -39,6 +39,10 @@ public:
         getScreen(1)->add(new Stk::Slider(40,160,420,35));
         getScreen(1)->add(new Stk::Input("Username",40,220,360,40,Stk::FONT_MEDIUM));
         getScreen(1)->add(new Stk::Input("Password",40,280,360,40,Stk::FONT_MEDIUM,Stk::INPUT_PW));
+        getScreen(1)->add(new Stk::Button3D("Try Me!",600,160,240,40,Stk::FONT_MEDIUM));
+        getScreen(1)->add(new Stk::Button3D("Try Me!",40,450,240,40,Stk::FONT_MEDIUM));
+        getScreen(1)->add(new Stk::Button3D("Try Me!",40,550,240,40,Stk::FONT_MEDIUM));
+        getScreen(1)->add(new Stk::Scrollbar(getScreen(1)));
 
         joinLoop();
     }
