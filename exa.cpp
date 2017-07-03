@@ -8,7 +8,7 @@ private:
 public:
     App()
     {
-        init("Example",Stk::CENTERED,Stk::CENTERED,500,500);
+        init("Example",Stk::CENTERED,Stk::CENTERED,500,350);
         
         /* Set Options */
         /* 

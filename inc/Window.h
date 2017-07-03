@@ -87,12 +87,20 @@ public:
             {
                 vert_v=((Scrollbar*)screens.at(screen)->get(screens.at(screen)->getAll().size()-1))->getVerticalValue();
             }
+            if(screens.at(screen)->__getHori())
+            {
+                hori_v=((Scrollbar*)screens.at(screen)->get(screens.at(screen)->getAll().size()-1))->getHorizontalValue();
+            }
 
             for(Widget* t: screens.at(screen)->getAll())
             {
                 if(screens.at(screen)->__getVert())
                 {
                     t->setY(t->getOriginalY()-vert_v);
+                }
+                if(screens.at(screen)->__getHori())
+                {
+                    t->setX(t->getOriginalX()-hori_v);
                 }
                 t->draw();
             }

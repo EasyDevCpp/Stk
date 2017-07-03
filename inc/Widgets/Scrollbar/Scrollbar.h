@@ -29,8 +29,6 @@ private:
     int atm_biggest_y=0;
     int vertical_v=0;
     int horizontal_v=0;
-    int vertical_steps;
-    int horizontal_steps;
     int vertical_stepc=0;
     int horizontal_stepc=0;
 
@@ -57,15 +55,6 @@ public:
             }
         }
         screen->__setScrollbars(vertical,horizontal);
-
-        if(vertical)
-        {
-            vertical_steps=atm_biggest_y/70;
-        }
-        if(horizontal)
-        {
-            horizontal_steps=atm_biggest_x/70;
-        }
     }
     ~Scrollbar(){}
 
@@ -78,29 +67,48 @@ public:
                 Base::renderFillRect(Style::border_color,Internal::width-15,0,15,Internal::height-15);
                 Base::renderFillRect(Style::normal_color,Internal::width-13,2+vertical_v,11,70);
 
-                if(mouse_x>=Internal::width-15&&mouse_x<=Internal::width&&mouse_y>=2+vertical_v+80&&
+                if(mouse_x>=Internal::width-15&&mouse_x<=Internal::width&&mouse_y>2+vertical_v+70&&mouse_y<=Internal::height-15&&
                     SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT)
                 {
-                    if(vertical_stepc<vertical_steps-1)
-                    {
-                        vertical_v+=(double)(Internal::height-19)/vertical_steps;
-                        vertical_stepc++;
+                    if(vertical_v<Internal::height-93)
+                    {                  
+                        vertical_v+=5;
+                        vertical_stepc+=(atm_biggest_y-Internal::height/2)/((Internal::height-93)/5);
                     }
                 }
-                else if(mouse_x>=Internal::width-15&&mouse_x<=Internal::width&&mouse_y<=2+vertical_v&&
+                else if(mouse_x>=Internal::width-15&&mouse_x<=Internal::width&&mouse_y<2+vertical_v&&mouse_y>=0&&
                     SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT)
                 {
-                    if(vertical_stepc>0)
+                    if(vertical_v>0)
                     {
-                        vertical_v-=(double)(Internal::height-19)/vertical_steps;
-                        vertical_stepc--;
-                    }
+                        vertical_v-=5;
+                        vertical_stepc-=(atm_biggest_y-Internal::height/2)/((Internal::height-93)/5);
+                    }   
                 }
             }
             if(horizontal)
             {
                 Base::renderFillRect(Style::border_color,0,Internal::height-15,Internal::width-15,15);
                 Base::renderFillRect(Style::normal_color,2+horizontal_v,Internal::height-13,70,11);
+
+                if(mouse_y>=Internal::height-15&&mouse_y<=Internal::height&&mouse_x>2+horizontal_v+70&&mouse_x<=Internal::width-15&&
+                    SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT)
+                {
+                    if(horizontal_v<Internal::width-93)
+                    {                  
+                        horizontal_v+=5;
+                        horizontal_stepc+=(atm_biggest_x-Internal::width/2)/((Internal::width-93)/5);
+                    }
+                }
+                else if(mouse_y>=Internal::height-15&&mouse_y<=Internal::height&&mouse_x<2+horizontal_v&&mouse_x>=0&&
+                    SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT)
+                {
+                    if(horizontal_v>0)
+                    {
+                        horizontal_v-=5;
+                        horizontal_stepc-=(atm_biggest_x-Internal::width/2)/((Internal::width-93)/5);
+                    }   
+                }
             }
         }
         else
@@ -108,10 +116,16 @@ public:
             
         }
     }
-    void setVerticalValue(int v){vertical_v=v;}
+    /* TODO: implement
+    void setVerticalValue(int v)
+    {
+        vertical_v=v;
+        
+    }
     void setHorizontalValue(int v){horizontal_v=v;}
-    int getVerticalValue(){return vertical_v;}
-    int getHorizontalValue(){return horizontal_v;}
+    */
+    int getVerticalValue(){return vertical_stepc;}
+    int getHorizontalValue(){return horizontal_stepc;}
 };
 
 #endif
