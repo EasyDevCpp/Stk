@@ -22,7 +22,9 @@ class Widget
 {
 private:
     int x;
+    int orig_x;
     int y;
+    int orig_y;
     int w;
     int h;
     int event=0;
@@ -37,7 +39,9 @@ public:
     void init(int x_pos,int y_pos,int width,int height,bool activate,bool w_state)
     {
         x=x_pos;
+        orig_x=x;
         y=y_pos;
+        orig_y=y;
         w=width;
         h=height;
         check=activate;
@@ -96,7 +100,9 @@ public:
     }
 
     int getX(){return x;}
+    int getOriginalX(){return orig_x;}
     int getY(){return y;}
+    int getOriginalY(){return orig_y;}
     int getWidth(){return w;}
     int getHeight(){return h;}
     bool getState(){return state;}

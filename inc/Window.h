@@ -33,6 +33,9 @@ private:
 
     std::vector<Screen*> screens;
 
+    int vert_v;
+    int hori_v;
+
 public:
     Window()
     {
@@ -80,8 +83,17 @@ public:
             SDL_RenderClear(render);
             action();
 
+            if(screens.at(screen)->__getVert())
+            {
+                vert_v=((Scrollbar*)screens.at(screen)->get(screens.at(screen)->getAll().size()-1))->getVerticalValue();
+            }
+
             for(Widget* t: screens.at(screen)->getAll())
             {
+                if(screens.at(screen)->__getVert())
+                {
+                    t->setY(t->getOriginalY()-vert_v);
+                }
                 t->draw();
             }
             SDL_RenderPresent(render);

@@ -42,6 +42,7 @@ public:
         getScreen(1)->add(new Stk::Button3D("Try Me!",600,160,240,40,Stk::FONT_MEDIUM));
         getScreen(1)->add(new Stk::Button3D("Try Me!",40,450,240,40,Stk::FONT_MEDIUM));
         getScreen(1)->add(new Stk::Button3D("Try Me!",40,550,240,40,Stk::FONT_MEDIUM));
+        getScreen(1)->add(new Stk::Button3D("Try Me!",40,850,240,40,Stk::FONT_MEDIUM));
         getScreen(1)->add(new Stk::Scrollbar(getScreen(1)));
 
         joinLoop();

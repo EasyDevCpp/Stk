@@ -29,6 +29,10 @@ private:
     int atm_biggest_y=0;
     int vertical_v=0;
     int horizontal_v=0;
+    int vertical_steps;
+    int horizontal_steps;
+    int vertical_stepc=0;
+    int horizontal_stepc=0;
 
 public:
     Scrollbar(){}
@@ -53,6 +57,15 @@ public:
             }
         }
         screen->__setScrollbars(vertical,horizontal);
+
+        if(vertical)
+        {
+            vertical_steps=atm_biggest_y/70;
+        }
+        if(horizontal)
+        {
+            horizontal_steps=atm_biggest_x/70;
+        }
     }
     ~Scrollbar(){}
 
@@ -63,12 +76,31 @@ public:
             if(vertical)
             {
                 Base::renderFillRect(Style::border_color,Internal::width-15,0,15,Internal::height-15);
-                Base::renderFillRect(Style::normal_color,Internal::width-13,2+vertical_v,11,80);
+                Base::renderFillRect(Style::normal_color,Internal::width-13,2+vertical_v,11,70);
+
+                if(mouse_x>=Internal::width-15&&mouse_x<=Internal::width&&mouse_y>=2+vertical_v+80&&
+                    SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT)
+                {
+                    if(vertical_stepc<vertical_steps-1)
+                    {
+                        vertical_v+=(double)(Internal::height-19)/vertical_steps;
+                        vertical_stepc++;
+                    }
+                }
+                else if(mouse_x>=Internal::width-15&&mouse_x<=Internal::width&&mouse_y<=2+vertical_v&&
+                    SDL_MOUSEBUTTONDOWN&&SDL_BUTTON(SDL_GetMouseState(&mouse_x,&mouse_y))==SDL_BUTTON_LEFT)
+                {
+                    if(vertical_stepc>0)
+                    {
+                        vertical_v-=(double)(Internal::height-19)/vertical_steps;
+                        vertical_stepc--;
+                    }
+                }
             }
             if(horizontal)
             {
                 Base::renderFillRect(Style::border_color,0,Internal::height-15,Internal::width-15,15);
-                Base::renderFillRect(Style::normal_color,2+horizontal_v,Internal::height-13,80,11);
+                Base::renderFillRect(Style::normal_color,2+horizontal_v,Internal::height-13,70,11);
             }
         }
         else

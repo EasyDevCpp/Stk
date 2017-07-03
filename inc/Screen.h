@@ -57,6 +57,8 @@ public:
         return widgets.at(index);
     }
     void __setScrollbars(bool t,bool h){vert_scrollbar=t;hori_scrollbar=h;}
+    bool __getVert(){return vert_scrollbar;}
+    bool __getHori(){return hori_scrollbar;}
 };
 
 #endif
